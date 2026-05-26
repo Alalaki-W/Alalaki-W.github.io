@@ -1,41 +1,18 @@
 # 配置里面 线上地址写法：http://xxx，本地地址。可以在`source`文件夹下创建目录，假如创建img和videos目录，则引用的时候使用 /img/xxx 写法, /videos/xxx  ... 
 
 # 菜单
-# menu:
-#   Home:
-#     url: /
-#     icon: fas fa-home
-#   Archives:
-#     url: /archives
-#     icon: fas fa-archive
-#   Tags:
-#     url: /tags
-#     icon: fas fa-tags
-#   Categories:
-#     url: /categories
-#     icon: fas fa-bookmark
-#   Friends:
-#     url: /friends
-#   更多: # 这是二级菜单的写法
-#    icon: fas fa-link
-#    children:
-#     - name: 图库
-#       url: /gallery
-#       icon: fas fa-music
-#     - name: 友情连接
-#       url: /huoban
-#       icon: fas fa-film
-#     - name: 关于我
-#       url: /me
-#       icon: fas fa-film
-#     - name: 百度
-#       url: http://baidu.com
-#       icon: fas fa-film
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th-list
+  tags: /tags/ || fa fa-tags
+  links: /links/ || fa fa-link
+  about: /about/ || fa fa-user
 
 # github地址, 头部导航右上角的github链接
-Github: 
+Github:
   on: true
-  url: https://github.com/yuang01/hexo-theme-bamboo
+  url: https://github.com/Alalaki-W/Alalaki-W.github.io
 
 # 网站logo
 logo: /medias/logo.png # 为空则不显示
@@ -49,11 +26,11 @@ sidebar:
   widget_library:
     side_blogger:
       on: true
-      avatar: https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp
+      avatar: '/medias/touxiang.jpg'
       shape: rectangle # circle, rectangle
       url: /about/
-      title: 青墨书晚风
-      subtitle: 我是副标题
+      title: Alalaki's Blog
+      subtitle: 向全栈进发 向具身进发 学习ing
       jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
@@ -62,11 +39,11 @@ sidebar:
         - icon: fas fa-rss
           url: /atom.xml
         - icon: fas fa-envelope
-          url: mailto:me@xxx.com
+          url: mailto:3421261803@qq.com
         - icon: fab fa-github
-          url: https://github.com/yuang01/hexo-theme-bamboo
+          url: https://github.com/Alalaki-W/Alalaki-W.github.io
         - icon: fab fa-qq
-          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=你的qq号码
+          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3421261803
     # ---------------------------------------
     side_toc:
       on: true
@@ -178,7 +155,7 @@ preloader:
 
 # 首页轮播图设置
 swiper:
-  on: true # 设置为false, 则首页不显示轮播图
+  on: false # 设置为false, 则首页不显示轮播图
   # 当在.md文件中，设置swiper:true，会将该文章放到轮播中，
   showPrevNext: true # 是否显示左右切换按钮
   showIndicators: false  # 是否显示指示器
@@ -197,12 +174,12 @@ swiper:
   defaultImg: 'https://pic1.zhimg.com/v2-af3ccef61cf58b1a70765747cc1bbeac_b.jpg' # 图片，没有则随机选取
   defaultVideo: '' # video，min-width:992px show
   defaultVideoLoadingImg: 'https://img14.360buyimg.com/ddimg/jfs/t1/175057/18/19582/882056/60ee7ac8Ef0045710/202d2ad878684a3b.gif' # video loading img -- use .gif img, 视频预加载动画，使用gif图片作为loading，为空则视频没有预加载动画
-  defaultTile: '青墨书晚风' # 标题
+  defaultTile: '' # 标题
   defaultDesc: [] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
-  defaultLeftBtnText: '阅读文档' # 左边按钮文字, 空字符串则不显示
-  defaultLeftBtnLink: 'https://yuang01.gitee.io/2021/02/08/hexo-theme-bamboo-new/' # 左边按钮链接 
-  defaultRightBtnText: '下载主题' # 右边按钮的文字，空字符串则不显示
-  defaultRightBtnLink: 'https://gitee.com/yuang01/hexo-theme-bamboo/repository/archive/dev.zip' # 右边的按钮的链接
+  defaultLeftBtnText: '' # 左边按钮文字, 空字符串则不显示
+  defaultLeftBtnLink: '' # 左边按钮链接
+  defaultRightBtnText: '' # 右边按钮的文字，空字符串则不显示
+  defaultRightBtnLink: '' # 右边的按钮的链接
   defaultDescTyped: true # defaultDesc文字是否开启打字特效  is typed
   defaultDescTypedSpeed: 100 # defaultDesc 打字速度, typed typeSpeed
   defaultDescTypedBackSpeed: 50 # defaultDesc 打字返回速度 typed backSpeed
@@ -239,7 +216,7 @@ show_count: true
 
 # 打赏功能
 donate:
-  on: true
+  on: false
 donate_message: 你的赏识是我前进的动力
 # 支付宝打赏图片相对路径
 Alipay: 'https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp'
@@ -358,8 +335,8 @@ copyright:
 # 首页座右铭
 motto:
   on: true
-  title: '座右铭'
-  content: '沉淀后我愿意做个温暖的人，有自己的喜好，有自己的原则，有自己的信仰，不急功近利，不浮夸轻薄。宠辱不惊，淡定安逸，心静如水，不忘初心，方得始终。——凌茜'
+  title: '自我介绍'
+  content: '宝可梦大师'
   background: 'url("https://img10.360buyimg.com/ddimg/jfs/t1/166587/8/21344/72069/6088c24fEda5fdeb6/f9730ab637b7ca47.png")' # url("xxx") or red or #000 or rgba() ..
 
 # 首页公告
@@ -485,7 +462,7 @@ gitalk:
 
 # utterance 评论  官网：https://utteranc.es/, 建议用这个评论，默认开启的这个评论
 utterance:
-  on: true
+  on: false
   # 仓库名字，格式：你的用户 ID/ 仓库名称，如：yuang01/yuang01.github.io
   repo: 
   # 主题
@@ -644,7 +621,7 @@ site_footer:
     #   url: https://github.com/yuang01/hexo-theme-bamboo
     # - icon: fas fa-qq
     #   url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541
-  copyright: 'Copyright © 2019 - 2020 <a href="https://github.com/yuang01">yuang01</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
+  copyright: 'Copyright © 2026 <a href="https://github.com/Alalaki-W">Alalaki</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
   custom: # 根据需要自行取消注释，label: 'markdown格式'，会在下面继续增加内容
     # - label: '<br>'
     # - label: '[Hello World](http://baidu.com)'
