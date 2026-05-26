@@ -1,36 +1,13 @@
 # 配置里面 线上地址写法：http://xxx，本地地址。可以在`source`文件夹下创建目录，假如创建img和videos目录，则引用的时候使用 /img/xxx 写法, /videos/xxx  ... 
 
 # 菜单
-# menu:
-#   Home:
-#     url: /
-#     icon: fas fa-home
-#   Archives:
-#     url: /archives
-#     icon: fas fa-archive
-#   Tags:
-#     url: /tags
-#     icon: fas fa-tags
-#   Categories:
-#     url: /categories
-#     icon: fas fa-bookmark
-#   Friends:
-#     url: /friends
-#   更多: # 这是二级菜单的写法
-#    icon: fas fa-link
-#    children:
-#     - name: 图库
-#       url: /gallery
-#       icon: fas fa-music
-#     - name: 友情连接
-#       url: /huoban
-#       icon: fas fa-film
-#     - name: 关于我
-#       url: /me
-#       icon: fas fa-film
-#     - name: 百度
-#       url: http://baidu.com
-#       icon: fas fa-film
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th-list
+  tags: /tags/ || fa fa-tags
+  links: /links/ || fa fa-link
+  about: /about/ || fa fa-user
 
 # github地址, 头部导航右上角的github链接
 Github: 
@@ -178,7 +155,7 @@ preloader:
 
 # 首页轮播图设置
 swiper:
-  on: true # 设置为false, 则首页不显示轮播图
+  on: false # 设置为false, 则首页不显示轮播图
   # 当在.md文件中，设置swiper:true，会将该文章放到轮播中，
   showPrevNext: true # 是否显示左右切换按钮
   showIndicators: false  # 是否显示指示器
@@ -644,7 +621,7 @@ site_footer:
     #   url: https://github.com/yuang01/hexo-theme-bamboo
     # - icon: fas fa-qq
     #   url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541
-  copyright: 'Copyright © 2019 - 2020 <a href="https://github.com/yuang01">yuang01</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
+  copyright: 'Copyright © 2026 <a href="https://github.com/Alalaki-W">Alalaki</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
   custom: # 根据需要自行取消注释，label: 'markdown格式'，会在下面继续增加内容
     # - label: '<br>'
     # - label: '[Hello World](http://baidu.com)'
