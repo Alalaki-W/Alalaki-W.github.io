@@ -26,11 +26,11 @@ sidebar:
   widget_library:
     side_blogger:
       on: true
-      avatar: ''
+      avatar: '/medias/touxiang.jpg'
       shape: rectangle # circle, rectangle
       url: /about/
       title: Alalaki's Blog
-      subtitle: 技术 · 项目 · 笔记 · 随笔
+      subtitle: 向全栈进发 向具身进发 学习ing
       jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
@@ -39,11 +39,11 @@ sidebar:
         - icon: fas fa-rss
           url: /atom.xml
         - icon: fas fa-envelope
-          url: mailto:alalaki@example.com
+          url: mailto:3421261803@qq.com
         - icon: fab fa-github
           url: https://github.com/Alalaki-W/Alalaki-W.github.io
         - icon: fab fa-qq
-          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=
+          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3421261803
     # ---------------------------------------
     side_toc:
       on: true
@@ -335,8 +335,8 @@ copyright:
 # 首页座右铭
 motto:
   on: true
-  title: '座右铭'
-  content: '沉淀后我愿意做个温暖的人，有自己的喜好，有自己的原则，有自己的信仰，不急功近利，不浮夸轻薄。宠辱不惊，淡定安逸，心静如水，不忘初心，方得始终。——凌茜'
+  title: '自我介绍'
+  content: '宝可梦大师'
   background: 'url("https://img10.360buyimg.com/ddimg/jfs/t1/166587/8/21344/72069/6088c24fEda5fdeb6/f9730ab637b7ca47.png")' # url("xxx") or red or #000 or rgba() ..
 
 # 首页公告
