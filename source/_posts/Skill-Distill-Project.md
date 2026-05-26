@@ -40,7 +40,9 @@ git config --global http.proxy http://localhost:7897
 git config --global https.proxy http://localhost:7897
 ```
 
-配好之后可以用 `curl -I https://github.com` 验证一下代理是否生效，能返回 200 就说明链路通了。
+配好之后可以用 `curl -I -L https://github.com` 验证一下代理是否生效（`-L` 跟随重定向），只要收到了 HTTP 响应，就说明链路通了。
+
+> 这里 git 用了 `--global`，会对本机所有仓库生效。如果之后不需要代理了，记得 `git config --global --unset http.proxy` 取消。
 
 ### 2.2 安装女娲.skill
 
