@@ -2,12 +2,12 @@
 
 # 菜单
 menu:
-  home: / || fa fa-home
-  archives: /archives/ || fa fa-archive
-  categories: /categories/ || fa fa-th-list
-  tags: /tags/ || fa fa-tags
-  links: /links/ || fa fa-link
-  about: /about/ || fa fa-user
+  Home: / || fa fa-home
+  Archives: /archives/ || fa fa-archive
+  Categories: /categories/ || fa fa-th-list
+  Tags: /tags/ || fa fa-tags
+  Links: /links/ || fa fa-link
+  About: /about/ || fa fa-user
 
 # github地址, 头部导航右上角的github链接
 Github:
