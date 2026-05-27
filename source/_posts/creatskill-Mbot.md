@@ -13,17 +13,17 @@ categories: 技术笔记
 
 在某个项目文件夹下新建`.claude`文件夹,正好用之前江科大stm32的资料试试。
 
-![image-20260527185313822](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527185313822.png)在刚刚建好的 `.cursor` 文件夹上右键，继续新建一个文件夹，命名为 `skills`。
+![image-20260527185313822](/images/creatskill-mbot/image-20260527185313822.png)在刚刚建好的 `.cursor` 文件夹上右键，继续新建一个文件夹，命名为 `skills`。
 
-![image-20260527185716251](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527185716251.png)
+![image-20260527185716251](/images/creatskill-mbot/image-20260527185716251.png)
 
 `skills`里再套个文件夹，代表你skill的名字
 
-![image-20260527185911503](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527185911503.png)
+![image-20260527185911503](/images/creatskill-mbot/image-20260527185911503.png)
 
 里面放`SKILL.md`,里面放的应该就是约束的Prompt。**SKILL不大写不行！**
 
-![image-20260527190150448](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527190150448.png)
+![image-20260527190150448](/images/creatskill-mbot/image-20260527190150448.png)
 
 打开`SKILL.md`,复制王哥给的提示词
 
@@ -61,46 +61,46 @@ categories: 技术笔记
 
 在Claude终端里输`/architect`，可以看到skill已经装载了，并且提示词是`Project`。
 
-![image-20260527191250166](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527191250166.png)
+![image-20260527191250166](/images/creatskill-mbot/image-20260527191250166.png)
 
-试一下调用这个skill看看能不能正常工作，就让他优化一下14-1独立看门狗好了，顺便把注释去掉![image-20260527191602268](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527191602268.png)
+试一下调用这个skill看看能不能正常工作，就让他优化一下14-1独立看门狗好了，顺便把注释去掉![image-20260527191602268](/images/creatskill-mbot/image-20260527191602268.png)
 
-![image-20260527191658052](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527191658052.png)
+![image-20260527191658052](/images/creatskill-mbot/image-20260527191658052.png)
 
 可以看到成功运行skill了，skill先是找到具体项目，然后完整阅读了代码
 
-![image-20260527192018472](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527192018472.png)
+![image-20260527192018472](/images/creatskill-mbot/image-20260527192018472.png)
 
 这里不知道为什么skill重复了一部分工作，可以看到在识别第一个约束之后又重新识别了
 
-![image-20260527192206189](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527192206189.png)
+![image-20260527192206189](/images/creatskill-mbot/image-20260527192206189.png)
 
 这里我直接AAA
 
-![image-20260527192530971](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527192530971.png)
+![image-20260527192530971](/images/creatskill-mbot/image-20260527192530971.png)
 
 继续
 
-![image-20260527192746303](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527192746303.png)
+![image-20260527192746303](/images/creatskill-mbot/image-20260527192746303.png)
 
 OK改完了，看看效果，注释啥的真没了，代码也明显改掉了
 
-![image-20260527193237076](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527193237076.png)
+![image-20260527193237076](/images/creatskill-mbot/image-20260527193237076.png)
 
-![image-20260527193301383](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527193301383.png)
+![image-20260527193301383](/images/creatskill-mbot/image-20260527193301383.png)
 
-![image-20260527193328215](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527193328215.png)
+![image-20260527193328215](/images/creatskill-mbot/image-20260527193328215.png)
 
 阔以，现在来试试纠下错，我直接复制的王哥的文档，但是明显提示词里有对每个问题停顿而Claude并没有停顿，并且还多次重复了skill，我直接让Cluade自查试试
 
-![image-20260527193718297](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527193718297.png)
+![image-20260527193718297](/images/creatskill-mbot/image-20260527193718297.png)
 
 对于“没停顿”，原因是skill是一次性加载的，一个文件不会加载一半就不读了，只要有上下文Cluade就会读下去
 
-![image-20260527200305326](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527200305326.png)
+![image-20260527200305326](/images/creatskill-mbot/image-20260527200305326.png)
 
 而对于“重复”，第一个重复了是因为逻辑重复了，并且skill的语法不对，很可能是cursor语法和claude有不同之处
 
-![image-20260527200634193](C:\Users\吴壮壮\AppData\Roaming\Typora\typora-user-images\image-20260527200634193.png)
+![image-20260527200634193](/images/creatskill-mbot/image-20260527200634193.png)
 
 还可以噻，感觉学到不少东西
