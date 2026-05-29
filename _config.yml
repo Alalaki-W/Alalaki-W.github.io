@@ -102,4 +102,6 @@ theme: hexo-theme-bamboo
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/Alalaki-W/Alalaki-W.github.io.git
+  branch: gh-pages
