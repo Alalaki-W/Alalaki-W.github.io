@@ -30,6 +30,8 @@ jobs:
 
       - name: Build
         run: npx hexo generate
+        env:
+          TZ: Asia/Shanghai
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
