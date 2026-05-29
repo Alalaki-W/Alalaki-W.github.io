@@ -29,7 +29,9 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx hexo generate
+        run: |
+          npx hexo clean
+          npx hexo generate
         env:
           TZ: Asia/Shanghai
 
