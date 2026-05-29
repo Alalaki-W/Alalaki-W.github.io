@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>大模型选型指南：一个具身智能学习者的思考 | Alalaki&#39;s Blog</title>
+  <title>分类: 随笔 | Alalaki&#39;s Blog</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -468,732 +468,110 @@
 </header>
         <!-- 内容区域 -->
         
-<!-- prismjs 代码高亮 -->
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('/medias/123.jpg')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        大模型选型指南：一个具身智能学习者的思考
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2026-05-29 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="post-detail-header_category">
-              技术笔记
-            </a>
-          
-        </span>
-      
-
-      
-    
+<div class="category-header"  style="background-image:url('https://pic3.zhimg.com/80/v2-98dcd81cb0d1fee52a807c13cedb8338_1440w.jpg?source=1940ef5c')">
+  <div class="category-header-title">
+    category
   </div>
-  
-  
-    <script defer src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h1 id="大模型选型指南：一个具身智能学习者的思考"><a href="#大模型选型指南：一个具身智能学习者的思考" class="headerlink" title="大模型选型指南：一个具身智能学习者的思考"></a>大模型选型指南：一个具身智能学习者的思考</h1><blockquote>
-<p>入坑具身智能一段时间了，最近在学 Agentic 工具链的过程中顺带梳理了一下主流模型。从一个学习者的视角，聊聊我对”具身智能研究用什么模型”这个问题的理解和思考。</p>
-</blockquote>
-<hr>
-<h2 id="一、我为什么会关注模型选型"><a href="#一、我为什么会关注模型选型" class="headerlink" title="一、我为什么会关注模型选型"></a>一、我为什么会关注模型选型</h2><p>最开始接触大模型的时候，我的用法很简单：打开一个对话框，把问题丢进去，等答案。</p>
-<p>现在开始学习具身智能，慢慢发现事情没那么简单。具身智能这个方向，技术栈又深又杂：ROS2、仿真器（MuJoCo &#x2F; Isaac Lab）、机器人 URDF 建模、强化学习、模仿学习、Sim2Real……随便一个环节都可能要跟代码、论文、配置文件打交道。这时候，<strong>用什么模型、怎么用</strong>，就从一个无关紧要的问题变成了直接影响效率的事情。</p>
-<p>我最近花了一些时间了解市面上的主流模型，结合我对具身智能研究流程的理解，整理了这份选型思考。</p>
-<blockquote>
-<p><strong>声明</strong>：我还在学习阶段，很多具身智能的具体工作（比如完整的论文复现、真机部署）我还没有亲手做过。下面更多是基于”我了解到具身智能研究会涉及这些环节”的推演和分析，而非实战经验总结。</p>
-</blockquote>
-<hr>
-<h2 id="二、具身智能研究到底需要大模型做什么"><a href="#二、具身智能研究到底需要大模型做什么" class="headerlink" title="二、具身智能研究到底需要大模型做什么"></a>二、具身智能研究到底需要大模型做什么</h2><p>在聊具体模型之前，先梳理一下：具身智能研究者日常可能会遇到哪些需要大模型帮忙的事情？</p>
-<p>我目前的理解是，大概有这几类：</p>
-<p><strong>第一类：啃论文、理解架构</strong></p>
-<p>具身智能领域的论文通常信息密度很高——系统架构图、数学公式、代码片段、实验配置表全挤在一起。一篇 manipulation 方向的论文可能有十几页，读完还要能把它的思路映射到代码上。这个过程的痛点不是”看不懂某句话”，而是<strong>信息太多、跨度太大，靠自己梳理很慢</strong>。</p>
-<p><strong>第二类：写代码、调 Bug</strong></p>
-<p>具体到代码层面，涉及的东西也很多样：ROS2 节点通信、仿真场景搭建（URDF&#x2F;SDF 模型文件、YAML 配置）、训练脚本（PyTorch + RL 算法）、推理部署（ONNX 导出、TensorRT 量化）。这些东西分布在不同的文件和目录里，牵一发动全身。</p>
-<p><strong>第三类：推公式、理解算法</strong></p>
-<p>运动学&#x2F;动力学的数学推导、强化学习里的策略梯度、扩散模型的原理……具身智能的算法门槛不低。有时候一个公式卡半天，需要一个能耐心做链式推理的帮手。</p>
-<p><strong>第四类：写文档、做记录</strong></p>
-<p>实验记录、周报、技术博客。这类事情对智力的要求不高，但对效率的要求高——最好又快又省。</p>
-<p><strong>每类任务的形态差异很大，所以不太可能一个模型包打天下。</strong></p>
-<hr>
-<h2 id="三、主流模型速览"><a href="#三、主流模型速览" class="headerlink" title="三、主流模型速览"></a>三、主流模型速览</h2><p>先把目前市面上几个主要的选项拉出来看看（参考Mbot Agentic技术栈文档）：</p>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>输入价格 ($&#x2F;MTok)</th>
-<th>输出价格 ($&#x2F;MTok)</th>
-<th>上下文窗口</th>
-<th>一句话定位</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Claude Opus 4.6</td>
-<td>5.00</td>
-<td>25.00</td>
-<td>1M</td>
-<td>Agent 编程天花板，贵但强</td>
-</tr>
-<tr>
-<td>Claude Sonnet 4.6</td>
-<td>3.00</td>
-<td>15.00</td>
-<td>1M</td>
-<td>编程性价比之王</td>
-</tr>
-<tr>
-<td>GPT-4.1</td>
-<td>2.00</td>
-<td>8.00</td>
-<td>1M</td>
-<td>指令遵循强，文档处理好</td>
-</tr>
-<tr>
-<td>GPT-4o</td>
-<td>2.50</td>
-<td>10.00</td>
-<td>128k</td>
-<td>多模态，综合均衡</td>
-</tr>
-<tr>
-<td>o3</td>
-<td>10.00</td>
-<td>40.00</td>
-<td>200k</td>
-<td>推理能力天花板</td>
-</tr>
-<tr>
-<td>o4-mini</td>
-<td>1.10</td>
-<td>4.40</td>
-<td>200k</td>
-<td>轻量推理，便宜够用</td>
-</tr>
-<tr>
-<td>Gemini 2.5 Pro</td>
-<td>1.25</td>
-<td>10.00</td>
-<td>1M</td>
-<td>多模态 + 超长上下文</td>
-</tr>
-<tr>
-<td>Gemini 2.5 Flash</td>
-<td>0.30</td>
-<td>2.50</td>
-<td>1M</td>
-<td>极速、便宜，批量处理首选</td>
-</tr>
-<tr>
-<td>DeepSeek V4</td>
-<td>极低</td>
-<td>极低</td>
-<td>1M</td>
-<td>国产性价比之王，中文友好</td>
-</tr>
-</tbody></table>
-<p>看这张表，我自己最大的感受是：<strong>1M token 的上下文窗口正在变成标配</strong>。一年前这可能还是个高端特性，现在连最便宜的 Flash 版都给了 1M。对具身智能来说这是好事——一个中等规模的代码仓库随便就几万行，加上论文 PDF，上下文不够大的模型根本装不下。</p>
-<hr>
-<h2 id="四、按场景推演：具身智能各环节适合什么模型"><a href="#四、按场景推演：具身智能各环节适合什么模型" class="headerlink" title="四、按场景推演：具身智能各环节适合什么模型"></a>四、按场景推演：具身智能各环节适合什么模型</h2><p>这部分是我的推演和分析，基于我对具身智能研究流程的理解，以及我实际用过一些模型后的感受。</p>
-<h3 id="场景-1：论文阅读理解"><a href="#场景-1：论文阅读理解" class="headerlink" title="场景 1：论文阅读理解"></a>场景 1：论文阅读理解</h3><p><strong>典型需求</strong>：把一篇 10-20 页的论文（含架构图、公式、实验结果表）快速吃透，理清核心思路和工程实现要点。</p>
-<p><strong>关键能力</strong>：超长上下文 + 多模态（读图）+ 结构化总结</p>
-<p><strong>我的分析</strong>：这是 <strong>Gemini 2.5 Pro</strong> 最舒服的场景。1M 上下文意味着可以把整篇 PDF 直接扔进去，不用分段。而且 Gemini 的多模态能力能直接理解论文里的系统架构图和网络结构图，不用你自己先把图画一遍。相比之下，纯文本模型读不了图里的信息，得靠自己补。</p>
-<p>如果是看中文论文或者中文技术博客，<strong>DeepSeek V4</strong> 也完全够用，1M 上下文，中文理解好，还便宜得多。</p>
-<p><strong>预算友好方案</strong>：DeepSeek V4（论文阅读够用，不用花 Gemini 的钱）</p>
-<h3 id="场景-2：代码开发与调试"><a href="#场景-2：代码开发与调试" class="headerlink" title="场景 2：代码开发与调试"></a>场景 2：代码开发与调试</h3><p><strong>典型需求</strong>：写 ROS2 节点、搭建仿真场景、调训练脚本、修 Bug。</p>
-<p><strong>关键能力</strong>：代码生成质量 + 跨文件理解 + 错误诊断</p>
-<p><strong>我的分析</strong>：这部分<strong>Claude Sonnet 4.6</strong> 是目前公认最强的性价比之选。我自己在对比实验中也有体会——同样是在嵌入式项目中新增一个模块，Claude（通过 Cursor）一次跑通，而千问反复报错修不好。</p>
-<p>这里还有一个值得注意的工具选择问题：<strong>Agent 架构 vs IDE 补全</strong>。Claude Code 采用的是独立 Agent 模式——你把任务交给它，它自己规划、执行、验证，像一个独立开发者。Cursor 是 IDE 协作模式——侧重人机实时交互。实测数据上，Claude Code 在复杂多文件任务上的成功率约 72%，传统 IDE Agent 约 55%–62%。</p>
-<p>对于具身智能开发中的跨文件问题（比如改一个 ROS 话题名，要同步改 publisher、subscriber、launch 文件、config），Agent 架构的全局视角优势很明显。</p>
-<p><strong>预算友好方案</strong>：DeepSeek V4（通过 cc-switch 接入 Claude Code，每月几乎不花钱）</p>
-<h3 id="场景-3：数学推导与算法理解"><a href="#场景-3：数学推导与算法理解" class="headerlink" title="场景 3：数学推导与算法理解"></a>场景 3：数学推导与算法理解</h3><p><strong>典型需求</strong>：理解论文里的数学推导，分析 RL 算法的收敛性，搞清楚某个动力学公式怎么来的。</p>
-<p><strong>关键能力</strong>：长链推理 + 数学严谨性</p>
-<p><strong>我的分析</strong>：这类场景适合<strong>OpenAI o 系列</strong>。o4-mini 的推理能力就很不错了，价格只要 o3 的十分之一。日常推导用 o4-mini 完全够，不用杀鸡用牛刀。</p>
-<p>不过说实话，对大多数学习者来说，这个场景可能不会特别高频——更多是用在啃理论性强的论文或者准备组会分享的时候。</p>
-<p><strong>预算友好方案</strong>：o4-mini（推理够用，价格友好）</p>
-<h3 id="场景-4：日常写作与文档"><a href="#场景-4：日常写作与文档" class="headerlink" title="场景 4：日常写作与文档"></a>场景 4：日常写作与文档</h3><p><strong>典型需求</strong>：写实验记录、周报、技术博客、整理学习笔记。</p>
-<p><strong>关键能力</strong>：表达清晰 + 速度快 + 便宜</p>
-<p><strong>我的分析</strong>：<strong>Gemini 2.5 Flash</strong> 是这个场景的答案。它推理深度肯定不如 Opus 或 o3，但写文档不需要那么深的推理。Flash 快、便宜（输入 $0.30&#x2F;MTok），能处理长上下文（比如你要总结一周的实验日志）。DeepSeek V4 也是好选择，中文表达甚至更自然。</p>
-<p><strong>预算友好方案</strong>：DeepSeek V4（中文写作体验好，极低成本）</p>
-<h3 id="场景-5：批量处理"><a href="#场景-5：批量处理" class="headerlink" title="场景 5：批量处理"></a>场景 5：批量处理</h3><p><strong>典型需求</strong>：标注实验数据、清理日志、批量提取结构化信息。</p>
-<p><strong>关键能力</strong>：速度 + 成本 + 大吞吐量</p>
-<p><strong>我的分析</strong>：<strong>Gemini 2.5 Flash</strong> 就是为这个设计的。便宜到几乎可以忽略成本，快到几乎没有等待感。1M 上下文也足够处理长序列的传感器数据日志。</p>
-<hr>
-<h2 id="五、一张速查表"><a href="#五、一张速查表" class="headerlink" title="五、一张速查表"></a>五、一张速查表</h2><p>把上面的分析汇总成一个决策参考：</p>
-<table>
-<thead>
-<tr>
-<th>你要做什么</th>
-<th>首选模型</th>
-<th>省钱替代</th>
-<th>为什么</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>读论文、理架构</td>
-<td>Gemini 2.5 Pro</td>
-<td>DeepSeek V4</td>
-<td>多模态读图 + 1M 上下文</td>
-</tr>
-<tr>
-<td>写代码、修 Bug</td>
-<td>Claude Sonnet 4.6</td>
-<td>DeepSeek V4 Pro</td>
-<td>编程能力公认最强</td>
-</tr>
-<tr>
-<td>推公式、啃算法</td>
-<td>o4-mini</td>
-<td>DeepSeek V4</td>
-<td>推理链质量好</td>
-</tr>
-<tr>
-<td>写文档、记笔记</td>
-<td>Gemini 2.5 Flash</td>
-<td>DeepSeek V4</td>
-<td>够用、快、便宜</td>
-</tr>
-<tr>
-<td>批量处理数据</td>
-<td>Gemini 2.5 Flash</td>
-<td>DeepSeek V4 Flash</td>
-<td>成本几乎可忽略</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="六、一个学生的省钱组合"><a href="#六、一个学生的省钱组合" class="headerlink" title="六、一个学生的省钱组合"></a>六、一个学生的省钱组合</h2><p>具身智能方向的学生，个人在模型上的预算不多。我给自己的规划是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">日常代码主力:  Claude 接 DeepSeek V4-pro    </span><br><span class="line">论文阅读:      Gemini 2.5 Pro         </span><br><span class="line">写作 + 杂活:   Gemini 2.5 Flash     </span><br><span class="line">数学推理:      o4-mini（按需）        </span><br><span class="line">──────────────────────────────────────────</span><br></pre></td></tr></table></figure>
-
-<p>如果预算更紧张，那就 <strong>DeepSeek V4 一把梭</strong>。它编程能力不如 Claude原模型，推理不如 o 系列，但除了无多模态外<strong>每个方面都不差</strong>，1M 上下文、中文友好、价格极低。对于学习阶段的大部分需求完全够用。</p>
-<hr>
-<h2 id="七、几点不成熟的感想"><a href="#七、几点不成熟的感想" class="headerlink" title="七、几点不成熟的感想"></a>七、几点不成熟的感想</h2><p>在梳理模型选型的过程中，我有几个比较深的感受：</p>
-<p><strong>1. 上下文窗口是硬门槛</strong></p>
-<p>具身智能和纯软件工程不一样。纯软件工程你面对的是代码，几十万 token 的上下文通常够了。但具身智能你要同时面对论文 PDF、代码仓库、仿真配置，这些东西加在一起可能几十万甚至上百万 token。1M 上下文不是奢侈品，是刚需。</p>
-<p><strong>2. 不同模型有各自的”甜点区”</strong></p>
-<p>以前我以为”用最好的模型就行了”。后来才意识到，不同模型在不同任务上的差距是真实存在的，而且是互补的：</p>
-<ul>
-<li>Gemini 强在多模态 + 大上下文，适合”理解”类任务</li>
-<li>Claude 强在编程和 Agent，适合”执行”类任务</li>
-<li>o 系列强在推理，适合”思考”类任务</li>
-</ul>
-<p>组合使用不是折腾，是真的能提效。</p>
-<p><strong>3. Agent 工具的选择可能比模型本身还重要</strong></p>
-<p>同样的模型（比如 Claude Sonnet），通过 Cursor 用和通过 Claude Code 用，体验完全不同。具身智能开发中的很多问题需要跨文件理解和多步骤修改，这种场景下 CLI Agent 的架构优势比单纯的模型能力差异更明显。</p>
-<p><strong>4. 对学习者来说，够用就好</strong></p>
-<p>我的很多分析是基于”具身智能研究者日常会做什么”的推演，但实际上作为学习者，很多高阶场景（比如完整的论文复现、真机部署调试）我暂时还不会高频碰到。所以现阶段选模型不需要追求”最强”，<strong>性价比高、覆盖面广</strong>更重要。DeepSeek V4 + 偶尔按需调用 Claude&#x2F;Gemini，对学习阶段来说是一个很舒服的配置。</p>
-<hr>
-<p><em>本文是我在学习 Agentic 工具链和具身智能过程中的阶段性思考。模型数据和价格参考 2025 年中，实际情况会持续变化。如果你也在学习这个方向，欢迎交流。</em></p>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="">
-              大模型
-            </a>
-          
-            <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="">
-              具身智能
-            </a>
-          
-            <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B/" class="">
-              模型选型
-            </a>
-          
-            <a href="/tags/Agentic/" class="">
-              Agentic
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Alalaki</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2026/05/29/大模型选型指南-具身智能研究者视角/" target="_blank" title="大模型选型指南：一个具身智能学习者的思考">https://Alalaki-W.github.io/2026/05/29/大模型选型指南-具身智能研究者视角/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
+  <div class="category-header-desc">
     
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/2026/05/27/%E6%96%B0%E5%BB%BA%20%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text"></div>
-      </div>
-      <!-- <div class="content">
-        
-1.1 术语速览 · 具身智能系统关键词手册目录（Table of Contents）
-1.1.1 学习范式与策略框架
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+      <span class="title" id="category-header-desc"></span>
+      <script>
+  function typedFn() {
+    const el = '#category-header-desc';
+    const type = 'categoryDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
+  typedFn();
+</script>
+      
   </div>
+  <div class="mask-box"></div>
+</div>
 
 
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
+<div class="category">
+  <div class="category-name">
+    <div class="name" style="background-color: #FFF;">随笔 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='/medias/touxiang.jpg'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2026-05-25</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2026/05/24/hello-world/">你好，世界！</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/2026/05/24/hello-world/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            这是我的第一篇博客文章。
+关于这个博客这个博客使用 Hexo 构建，托管在 GitHub Pages 上，采用 Bamboo 主题。
+接下来这里将记录我的技术学习、项目经验和生活思考。
+
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2026/05/24/hello-world/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/2026/05/24/hello-world/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Alalaki's Blog</h2>
-        
-        
-          <p>向全栈进发 向具身进发 学习ing</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">Alalaki's Blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:3421261803@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Alalaki-W/Alalaki-W.github.io"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=3421261803"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E8%80%85%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-text">大模型选型指南：一个具身智能学习者的思考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%85%B3%E6%B3%A8%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B"><span class="toc-text">一、我为什么会关注模型选型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E5%88%B0%E5%BA%95%E9%9C%80%E8%A6%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">二、具身智能研究到底需要大模型做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%BB%E6%B5%81%E6%A8%A1%E5%9E%8B%E9%80%9F%E8%A7%88"><span class="toc-text">三、主流模型速览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8C%89%E5%9C%BA%E6%99%AF%E6%8E%A8%E6%BC%94%EF%BC%9A%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%90%84%E7%8E%AF%E8%8A%82%E9%80%82%E5%90%88%E4%BB%80%E4%B9%88%E6%A8%A1%E5%9E%8B"><span class="toc-text">四、按场景推演：具身智能各环节适合什么模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1%EF%BC%9A%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3"><span class="toc-text">场景 1：论文阅读理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2%EF%BC%9A%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-text">场景 2：代码开发与调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-3%EF%BC%9A%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3"><span class="toc-text">场景 3：数学推导与算法理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-4%EF%BC%9A%E6%97%A5%E5%B8%B8%E5%86%99%E4%BD%9C%E4%B8%8E%E6%96%87%E6%A1%A3"><span class="toc-text">场景 4：日常写作与文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-5%EF%BC%9A%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86"><span class="toc-text">场景 5：批量处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E5%BC%A0%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-text">五、一张速查表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E5%AD%A6%E7%94%9F%E7%9A%84%E7%9C%81%E9%92%B1%E7%BB%84%E5%90%88"><span class="toc-text">六、一个学生的省钱组合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%87%A0%E7%82%B9%E4%B8%8D%E6%88%90%E7%86%9F%E7%9A%84%E6%84%9F%E6%83%B3"><span class="toc-text">七、几点不成熟的感想</span></a></li></ol></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
-
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2026/05/29/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97-%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E8%80%85%E8%A7%86%E8%A7%92/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/123.jpg" class="lazyload placeholder" data-srcset="/medias/123.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-29</span>
-                
-              </div>
-              <a class="post-title" href="/2026/05/29/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97-%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E8%80%85%E8%A7%86%E8%A7%92/">大模型选型指南：一个具身智能学习者的思考</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2026/05/27/%E6%96%B0%E5%BB%BA%20%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-27</span>
-                
-              </div>
-              <a class="post-title" href="/2026/05/27/%E6%96%B0%E5%BB%BA%20%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/">暂无标题</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2026/05/27/creatskill-Mbot/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-27</span>
-                
-              </div>
-              <a class="post-title" href="/2026/05/27/creatskill-Mbot/">Mbot-Agentic技术栈学习-Claude创建skill-日记</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2026/05/26/xujingyv-skill-log/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-26</span>
-                
-              </div>
-              <a class="post-title" href="/2026/05/26/xujingyv-skill-log/">用女娲.skill蒸馏B站网红徐静雨全记录</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>
